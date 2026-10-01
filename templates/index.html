@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: AGPL-3.0-only -->
+<!-- Copyright (C) 2026 Ahmet Harun Ertürk -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ app_name }} &middot; {{ app_tagline }}</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' rx='3' fill='none' stroke='%2318181b' stroke-width='2'/%3E%3Crect x='10' y='10' width='8' height='8' rx='1.5' fill='%2318181b'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <div class="brand">
+        <svg class="brand-icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2.75" y="2.75" width="18.5" height="18.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="10" y="10" width="7.5" height="7.5" rx="1.5" fill="currentColor"/>
+        </svg>
+        <span class="brand-name">{{ app_name }}</span>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-tagline">{{ app_tagline }}</span>
+      </div>
+      <div class="header-actions">
+        <label class="model-picker" title="Weights used for detection">
+          <span class="model-picker-label">Model</span>
+          <select id="modelPicker" class="model-picker-select" aria-label="Detection model"></select>
+        </label>
+        <label class="model-picker" title="Confidence threshold for detections">
+          <span class="model-picker-label">Confidence</span>
+          <input id="confInput" class="model-picker-select conf-input" type="number"
+                 min="0.05" max="0.95" step="0.05" value="{{ default_confidence }}"
+                 aria-label="Confidence threshold" />
+        </label>
+        <div class="status-badge" id="statusBadge" data-state="loading" title="Model status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="statusText">Checking model&hellip;</span>
+        </div>
+        <a class="btn btn-secondary" href="/logout">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell page">
+    <section class="intro">
+      <h1>{{ app_name }}</h1>
+      <p class="subtitle">{{ page_subtitle }}</p>
+    </section>
+
+    <section class="workspace" id="workspace" aria-label="Detection workspace">
+      <div class="alert" id="errorAlert" role="alert" hidden>
+        <span class="alert-dot" aria-hidden="true"></span>
+        <span id="errorText"></span>
+      </div>
+
+      <!-- Preview -->
+      <div class="preview" id="preview" hidden>
+        <div class="preview-media">
+          <img id="previewImg" alt="Preview of the selected image" />
+        </div>
+        <div class="preview-meta">
+          <div class="meta-lines">
+            <span class="meta-name" id="metaName"></span>
+            <span class="meta-detail" id="metaDetail"></span>
+          </div>
+          <span class="analyzing-chip">
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Analyzing&hellip;</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <section class="result" id="result" hidden>
+        <div class="result-header">
+          <h2>Detection Result</h2>
+          <span class="chip" id="countBadge">{{ count_zero }}</span>
+        </div>
+
+        <figure class="result-figure">
+          <img id="resultImg" alt="{{ result_alt }}" />
+        </figure>
+
+        <p class="result-summary" id="summary" hidden></p>
+
+        <div class="table-wrap" id="tableWrap" hidden>
+          <table class="detections-table">
+            <thead>
+              <tr>
+                <th scope="col">Class</th>
+                <th scope="col">Confidence</th>
+                <th scope="col">Coordinates</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          <h3>{{ empty_title }}</h3>
+          <p>Upload another image to run a new prediction.</p>
+        </div>
+      </section>
+
+      <!-- Upload -->
+      <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Upload an image">
+        <span class="drop-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 15.5V4.5"/>
+            <path d="M7.5 9 12 4.5 16.5 9"/>
+            <path d="M4 15.5v2.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2.5"/>
+          </svg>
+        </span>
+        <p class="drop-title" id="dropTitle">Drop an image here</p>
+        <p class="drop-hint">or choose a file from your computer</p>
+        <button type="button" class="btn btn-primary" id="chooseBtn">Choose image</button>
+        <p class="drop-formats">JPG, JPEG, PNG or WEBP &middot; up to {{ upload_limit_mb }} MB</p>
+      </div>
+      <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" hidden />
+    </section>
+  </main>
+
+  <script>window.__APP_META__ = {{ app_meta | tojson }};</script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

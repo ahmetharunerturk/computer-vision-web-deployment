@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: AGPL-3.0-only -->
+<!-- Copyright (C) 2026 Ahmet Harun Ertürk -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in &middot; {{ app_name }}</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' rx='3' fill='none' stroke='%2318181b' stroke-width='2'/%3E%3Crect x='10' y='10' width='8' height='8' rx='1.5' fill='%2318181b'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <div class="brand">
+        <svg class="brand-icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2.75" y="2.75" width="18.5" height="18.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="10" y="10" width="7.5" height="7.5" rx="1.5" fill="currentColor"/>
+        </svg>
+        <span class="brand-name">{{ app_name }}</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell login-wrap">
+    <form class="login-card" method="post" action="/login" autocomplete="on">
+      <h1>Sign in</h1>
+      <p class="login-subtitle">{{ login_subtitle }}</p>
+
+      {% if error %}
+      <div class="alert alert-danger" role="alert">
+        <span class="alert-dot" aria-hidden="true"></span>
+        <span>{{ error }}</span>
+      </div>
+      {% endif %}
+
+      <label class="login-field">
+        <span class="login-label">Username</span>
+        <input class="login-input" type="text" name="username" autocomplete="username" autofocus required />
+      </label>
+
+      <label class="login-field">
+        <span class="login-label">Password</span>
+        <input class="login-input" type="password" name="password" autocomplete="current-password" required />
+      </label>
+
+      <button type="submit" class="btn btn-primary login-submit">Sign in</button>
+    </form>
+  </main>
+</body>
+</html>

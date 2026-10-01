@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (C) 2026 Ahmet Harun Ertürk
+fastapi
+uvicorn
+python-multipart
+jinja2
+ultralytics==8.4.165
+Pillow
+opencv-python-headless
+python-dotenv
+psycopg[binary]

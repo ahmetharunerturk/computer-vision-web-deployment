@@ -1,0 +1,24 @@
+# Secrets / local configuration - never commit these
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Model weights
+best.pt
+*.pt
+runs/
+*.zip
+*.tar
+*.tar.gz
+dataset/
+datasets/
+
+# Runtime data
+*.bak
+backups/
