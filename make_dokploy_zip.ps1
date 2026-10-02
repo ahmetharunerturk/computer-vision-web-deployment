@@ -24,6 +24,9 @@ $files = @(
     'templates/login.html',
     'DOKPLOY.md',
     'README.md',
+    'docs/images/sign-in.png',
+    'docs/images/drop.png',
+    'docs/images/bird.png',
     'LICENSE',
     'USAGE.md'
 )

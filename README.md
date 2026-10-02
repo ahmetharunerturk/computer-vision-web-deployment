@@ -12,6 +12,20 @@ The repository contains **no model weights or training data**. It supports Ultra
 - Optional PostgreSQL request logging, disabled by default.
 - Dokploy ZIP build scripts and a detailed [setup guide](USAGE.md).
 
+## Screenshots
+
+**Sign in**
+
+![Sign-in page](docs/images/sign-in.png)
+
+**Image upload**
+
+![Image upload page](docs/images/drop.png)
+
+**Detection result**
+
+![Detection result with a labeled bounding box](docs/images/bird.png)
+
 ## Quick start with Docker
 
 1. Put an Ultralytics YOLO detection weight file, such as `best.pt`, in a local `models/` directory. Set its filename in `MODEL_PATH` below.

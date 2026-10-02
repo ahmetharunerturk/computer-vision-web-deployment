@@ -57,6 +57,7 @@ Blocked weight filenames (BLOCKED_WEIGHTS: {blocked}) are refused at load time.
       db.py              optional PostgreSQL request logging
 {model_lines}
       static/ templates/ web UI assets
+      docs/images/       README screenshots
       requirements.txt   application dependencies
       Dockerfile         python:3.11-slim, CPU torch index, healthcheck on /health
       .env.example       configuration template (no secrets in this bundle)
@@ -106,7 +107,7 @@ def main() -> int:
     shutil.copy2(SRC / "api" / "server.py", TREE / "api" / "server.py")
     print("+ api/server.py")
 
-    for d in ("static", "templates"):
+    for d in ("static", "templates", "docs"):
         shutil.copytree(SRC / d, TREE / d,
                         ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store"))
         n = sum(1 for _ in (TREE / d).rglob("*") if _.is_file())

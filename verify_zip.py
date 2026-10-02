@@ -31,6 +31,8 @@ assert f"{PREFIX}/.env" not in names, "private .env must not be packaged"
 assert f"{PREFIX}/USAGE.md" in names, "deployment guide missing"
 assert f"{PREFIX}/DOKPLOY.md" in names, "Dokploy guide missing"
 assert f"{PREFIX}/LICENSE" in names, "license missing"
+for screenshot in ("sign-in.png", "drop.png", "bird.png"):
+    assert f"{PREFIX}/docs/images/{screenshot}" in names, f"screenshot missing: {screenshot}"
 
 print("\n== shipped models ==")
 shipped = [n for n in names if n.startswith(f"{PREFIX}/models/") and n.endswith(".pt")]
